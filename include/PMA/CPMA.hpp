@@ -1736,8 +1736,8 @@ uint64_t CPMA<traits>::find_containing_leaf_index_debug(key_type e,
   return (idx + end_linear - 1) * (elts_per_leaf());
 }
 
-static_counter search_cnt("total searches");
-static_counter search_steps_cnt("total_search_steps");
+//static_counter search_cnt("total searches");
+//static_counter search_steps_cnt("total_search_steps");
 
 // searches in the unlocked array and only looks at leaf heads
 // start is in PMA index, start the binary search after that point
@@ -1751,7 +1751,7 @@ uint64_t CPMA<traits>::find_containing_leaf_index(key_type e, uint64_t start,
   }
   // this path shouldn't be taken since 0 is handled specially
   assert(e != 0);
-  search_cnt.add(1);
+  //search_cnt.add(1);
   if constexpr (head_form == Eytzinger) {
     if (start == 0 && end == std::numeric_limits<uint64_t>::max()) {
       uint64_t length = total_leaves_rounded_up();
@@ -2029,7 +2029,7 @@ uint64_t CPMA<traits>::find_containing_leaf_index(key_type e, uint64_t start,
   idx = (index_to_head_key(idx + first_step) <= e) ? idx + first_step : idx;
   static constexpr uint64_t linear_cutoff = (head_form == InPlace) ? 1 : 128;
   while (step > linear_cutoff) {
-    search_steps_cnt.add(1);
+    //search_steps_cnt.add(1);
     step >>= 1U;
     assert(idx < total_leaves());
     assert(index_to_head_key(idx + step) != 0);

@@ -2382,8 +2382,8 @@ public:
               << std::endl;
   }
 };
-static_counter split_cnt("leaf split");
-static_counter size_cnt("counting the bytes");
+//static_counter split_cnt("leaf split");
+//static_counter size_cnt("counting the bytes");
 template <class T, typename... VTs> class uncompressed_leaf {
 
 public:
@@ -3298,7 +3298,7 @@ public:
              rank_tree_array_type rank_tree_array,
              uint64_t total_leaves) const {
 
-    split_cnt.add(num_leaves);
+    //split_cnt.add(num_leaves);
     uint64_t elements_per_leaf = bytes_per_leaf / sizeof(T);
 
     // approx occupied bytes per leaf
@@ -3877,7 +3877,7 @@ public:
 
   template <bool head_in_place>
   [[nodiscard]] size_t used_size_no_overflow() const {
-    size_cnt.add(1);
+    //size_cnt.add(1);
     size_t num_elements = 0;
     for (uint64_t i = 0; i < length_in_elements; i++) {
       num_elements += (array.get(i) != 0);
